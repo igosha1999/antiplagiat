@@ -23,8 +23,8 @@
               style="color:red">*Завантажте будь ласка файл у <b>(.zip)</b> форматі </span>
                 <span *ngIf="selectedFiles.length > 0"
                       style="color:green">Файл у форматі (.zip) успішно завантажений!</span>
-                <label *ngIf="selectedFiles.length > 0" for="files"
-                       class="file">{{selectedFiles[0].name ?? 'Виберіть файл'}}</label>
+                <label for="files"
+                       class="file">{{selectedFiles.length > 0 ? selectedFiles[0].name : 'Виберіть файл'}}</label>
                 <input id="files" style="display: none" type="file" (change)="onFileSelectedArchive($event)"
                        accept=".zip"/>
             </div>
