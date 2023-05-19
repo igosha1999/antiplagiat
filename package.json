@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
+    "deploy": "ng deploy --configuration production --base-href=https://igosha1999.github.io/antiplagiat/",
     "test": "ng test"
   },
   "private": true,
