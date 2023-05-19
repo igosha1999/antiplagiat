@@ -1,0 +1,45 @@
+.home-content {
+  width: 100%;
+  height: 100%;
+  padding: 0 50px;
+}
+
+.info-blocks {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 200px;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.box {
+  width: 400px;
+  border: 2px solid #000;
+  margin: 0 auto 15px;
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.box {
+  max-height: 300px;
+}
+
+.info {
+  background-color: #ddd;
+  border-color: #aaa;
+}
+
+.info-button {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.info-footer {
+  width: 100%;
+  margin-top: 150px;
+}

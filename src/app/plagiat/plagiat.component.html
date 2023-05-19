@@ -1,0 +1,95 @@
+<header class="header">
+  <h1 class="header-title">--- Виявлення антиплагіату --- </h1>
+</header>
+<main class="content">
+  <div class="center-form" *ngIf="similarCode.length == 0">
+    <div class="form">
+      <h2 class="form-title">Заповніть поля для перевірки</h2>
+      <div class="choose-language">
+        <select [(ngModel)]="language">
+          <option value="" selected disabled hidden>Виберіть мову програмування</option>
+          <option value="php">PHP</option>
+          <option value="typescript">TypeScript</option>
+        </select>
+      </div>
+      <div style="display: flex;flex-direction: column;gap: 5px">
+        <span *ngIf="!codeFile" style="color:red">*Завантажте будь ласка один файл</span>
+        <span *ngIf="codeFile" style="color:green">Файл успішно завантажений!</span>
+        <label for="file" class="file">{{codeFile?.name ?? 'Виберіть файл'}}</label>
+        <input style="display: none" id="file" type="file" (change)="onCodeFileSelected($event)">
+      </div>
+      <div style="display: flex;flex-direction: column;gap: 5px">
+        <span *ngIf="selectedFiles.length == 0"
+              style="color:red">*Завантажте будь ласка файл у <b>(.zip)</b> форматі </span>
+        <span *ngIf="selectedFiles.length > 0" style="color:green">Файл у форматі (.zip) успішно завантажений!</span>
+        <label for="files" class="file">{{selectedFiles[0]?.name ?? 'Виберіть файл'}}</label>
+        <input id="files" style="display: none" type="file" (change)="onFileSelectedArchive($event)" accept=".zip"/>
+      </div>
+      <div style="position:relative;display: flex;flex-direction: column;gap: 5px">
+        <span *ngIf="rangePercent == -1" style="color:red">*Виберіть поріг доступності у %</span>
+        <input #rangeInput type="range" [value]="rangePercent">
+        <h4 style="position:absolute;text-align: center;width: 100%;bottom: -12px" #rangeOutput></h4>
+      </div>
+      <button style="margin-top: 20px" class="button-23"
+              [disabled]="!(selectedFiles.length > 0 && codeFile && language)"
+              (click)="checkPlagiarism()">
+        Перевірити
+      </button>
+    </div>
+  </div>
+  <div class="result">
+    <div *ngIf="similarCode.length > 0">
+      <h3 class="result-title">Результат перевірки:</h3>
+      <ul class="result-content">
+        <li class="result-item" *ngFor="let fragment of similarCode; let i = index">
+          <div class="result-text" style="flex-direction: column">
+            <div class="table-head">
+              <span>Результат номер {{i + 1}}</span>
+              <div (click)='toggleMenu($event);fragment.isExpanded=!fragment.isExpanded'
+                   [class.active]="!indexExpanded"
+                   class='navMenu tablet'>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div *ngIf="!fragment.isExpanded">
+              <div
+                style="width: calc(100% - 50px);display: flex;flex-direction: column;margin: 0 25px;background: #fff;padding: 15px;border-radius: 4px">
+                <span style="font-size: 17px;margin-left: 20px">Шлях файлу: <b>{{ fragment.name }}</b></span>
+                <br>
+                <span
+                  style="font-size: 17px;margin-left: 20px">Визначена мова програмування: <b>{{language}}</b></span>
+                <span
+                  style="font-size: 17px;margin-left: 20px">Кількість відсотків антиплагіату: <b>{{ fragment.percent|number:'1.2-2' }}
+                  %</b></span>
+                <span
+                  style="font-size: 17px;margin-left: 20px">Результат : <b>{{ fragment.result }}</b></span>
+              </div>
+              <div class="result-text">
+            <pre style="width: 50%;display: flex;justify-content: center;flex-direction: column;gap: 10px">
+              <span style="font-size: 20px;font-weight:bold;color:black;margin-left: 20px">Головний код вчителя</span>
+              <code [highlight]="fragment.code1" [languages]="[language]"
+                    (highlighted)="onHighlight($event)" [lineNumbers]="true">
+              </code>
+            </pre>
+                <pre style="width: 50%;display: flex;justify-content: center;flex-direction: column;gap: 10px">
+                <span
+                  style="font-size: 20px;font-weight:bold;color:black;margin-left: 20px">Код учня для перевірки</span>
+                <code [highlight]="fragment.code2" [languages]="[language]"
+                      (highlighted)="onHighlight($event)" [lineNumbers]="true"></code>
+            </pre>
+              </div>
+              <pre
+                style="width: calc(100% - 50px);margin: 30px auto 30px auto;display: flex;flex-direction: column;gap: 10px">
+              <span style="font-size: 20px;font-weight:bold;color:black;margin-left: 20px">Повний розбір коду</span>
+              <code style="padding: 30px;background: white;border-radius: 4px"
+                    [innerHTML]="fragment.diff | safeHtml"></code>
+            </pre>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</main>

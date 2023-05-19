@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css?family=Spectral+SC:700');
+/* Add application styles & imports to this file! */
+@import '~highlight.js/styles/github.css';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+pre {
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
+  word-wrap: break-word;
+}
+
+pre code {
+  flex: 1;
+  line-height: 1.5em;
+  font-size: 14px;
+  min-height: 100%;
+  padding: 1em 1.2em;
+}
+
+pre code.hljs-line-numbers {
+  padding: 0 !important;
+}
+
+/** Line numbers styles */
+.hljs {
+  margin: 0 1em;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  transition: border ease 1s;
+}
+
+.hljs-ln {
+  padding: 8px 0;
+}
+
+.hljs-ln tr:first-child td {
+  padding-top: 8px !important;
+}
+
+.hljs-ln tr:last-child td {
+  padding-bottom: 8px !important;
+}
+
+/* for block of numbers */
+td.hljs-ln-numbers {
+  user-select: none;
+  text-align: center;
+  border-right: 1px solid gray;
+  vertical-align: top;
+  padding-right: 8px !important;
+  padding-left: 8px !important;
+}
+
+/* for block of code */
+td.hljs-ln-code {
+  padding-left: 8px !important;
+}
+
+.button-23 {
+  background-color: #ddd;
+  border: 2px solid #aaa;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #222222;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  padding: 13px 23px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+  user-select: none;
+  -webkit-user-select: none;
+  width: 400px;
+}
+
+.button-23:active {
+  background-color: #ddd;
+  transform: scale(.96);
+}
+
+.button-23:focus-visible {
+  box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+  transition: box-shadow .2s;
+}
+
+
+.button-23:disabled {
+  border: 1px solid #999999;
+  transform: scale(1);
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
