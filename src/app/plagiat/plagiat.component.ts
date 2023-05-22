@@ -24,8 +24,9 @@ export class PlagiatComponent implements OnInit, AfterViewInit, OnDestroy {
   similarCode: any[] = [];
   response!: HighlightAutoResult;
   language: string = '';
-  isPlagiat: boolean = false;
   indexExpanded: boolean = false;
+
+  isShowHelpColor: boolean = true;
 
   constructor(private highlightService: HighlightJS,
               private renderer: Renderer2) {
